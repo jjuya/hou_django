@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+  <h1>Board list</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Created_date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for board in boards %}
+        <tr>
+          <th scope="row">{{ board.id }}</th>
+          <td>{{ board.title }}</td>
+          <td>{{ board.created_date }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
