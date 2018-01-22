@@ -15,7 +15,7 @@
       {% for board in boards %}
         <tr>
           <th scope="row">{{ board.id }}</th>
-          <td>{{ board.title }}</td>
+          <td><a href="{% url 'board_detail' pk=board.pk %}">{{ board.title }}</a></td>
           <td>{{ board.created_date }}</td>
         </tr>
       {% endfor %}
