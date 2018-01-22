@@ -24,4 +24,19 @@ def board_new(request):
     else:
         form = BoardForm()
 
-    return render(request, 'board/board_new.html', {'form' : form})
+    return render(request, 'board/board_form.html', {'form' : form})
+
+def board_edit(request, pk):
+    board = get_object_or_404(Board, pk = pk)
+
+    if request.method == "POST":
+        form = BoardForm(request.POST, instance=board)
+
+        if form.is_valid():
+            board = form.save()
+
+            return redirect('board_detail', pk=board.pk)
+    else:
+        form = BoardForm(instance=board)
+
+    return render(request, 'board/board_form.html', {'form' : form})
