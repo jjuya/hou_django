@@ -11,7 +11,9 @@ def board_list(request):
 def board_detail(request, pk):
     board = get_object_or_404(Board, pk = pk)
 
-    return render(request, 'board/board_detail.html', {'board' : board})
+    lists = List.objects.filter(board = board, created_date__lte=timezone.now()).order_by('created_date')
+
+    return render(request, 'board/board_detail.html', {'board' : board, 'lists' : lists})
 
 def board_new(request):
     if request.method == "POST":
@@ -44,5 +46,5 @@ def board_edit(request, pk):
 def board_destroy(request, pk):
     board = get_object_or_404(Board, pk = pk)
     board.delete()
-    
+
     return redirect('board_list')

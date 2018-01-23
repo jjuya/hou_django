@@ -1,5 +1,29 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    {{board.title}}
+    <h1>{{board.title}}</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Created_date</th>
+          <th><a class="btn btn-default" href=""><span class="fa fa-plus"></span></a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for list in lists %}
+          <tr>
+            <th scope="row">{{ list.id }}</th>
+            <td><a href="">{{ list.title }}</a></td>
+            <td>{{ list.created_date }}</td>
+            <td>
+              <a class="btn btn-primary btn-sm" href=""><span class="fa fa-pencil"></span></a>
+              <a class="btn btn-danger btn-sm" href=""><span class="fa fa-trash"></span></a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 {% endblock %}
