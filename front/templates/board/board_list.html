@@ -18,7 +18,10 @@
           <th scope="row">{{ board.id }}</th>
           <td><a href="{% url 'board_detail' pk=board.pk %}">{{ board.title }}</a></td>
           <td>{{ board.created_date }}</td>
-          <td><a class="btn btn-primary btn-sm" href="{% url 'board_edit' pk=board.pk %}"><span class="fa fa-pencil"></span></a></td>
+          <td>
+            <a class="btn btn-primary btn-sm" href="{% url 'board_edit' pk=board.pk %}"><span class="fa fa-pencil"></span></a>
+            <a class="btn btn-danger btn-sm" href="{% url 'board_destroy' pk=board.pk %}"><span class="fa fa-trash"></span></a>
+          </td>
         </tr>
       {% endfor %}
     </tbody>

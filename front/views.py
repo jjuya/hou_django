@@ -40,3 +40,9 @@ def board_edit(request, pk):
         form = BoardForm(instance=board)
 
     return render(request, 'board/board_form.html', {'form' : form})
+
+def board_destroy(request, pk):
+    board = get_object_or_404(Board, pk = pk)
+    board.delete()
+    
+    return redirect('board_list')
