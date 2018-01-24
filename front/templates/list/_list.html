@@ -2,6 +2,6 @@
 <td><a href="">{{ list.title }}</a></td>
 <td>{{ list.created_date }}</td>
 <td>
-  <a class="btn btn-primary btn-sm" href=""><span class="fa fa-pencil"></span></a>
+  <a class="btn btn-primary btn-sm" href="{% url 'list_edit' pk=list.pk %}""><span class="fa fa-pencil"></span></a>
   <a class="btn btn-danger btn-sm" href=""><span class="fa fa-trash"></span></a>
 </td>

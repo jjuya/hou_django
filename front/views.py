@@ -64,3 +64,18 @@ def list_new(request):
     html = render_to_string('list/_list.html', {'list' : new_list})
 
     return HttpResponse(json.dumps(html), content_type='application/json')
+
+def list_edit(request, pk):
+    edit_list = get_object_or_404(List, pk = pk)
+
+    if request.method == "POST":
+        form = ListForm(request.POST, instance=edit_list)
+
+        if form.is_valid():
+            edit_list = form.save()
+
+            return redirect('board_detail', pk=edit_list.board.pk)
+    else:
+        form = ListForm(instance=edit_list)
+
+    return render(request, 'list/list_form.html', {'form' : form})
