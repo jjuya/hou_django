@@ -1,29 +1,36 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-  <h1>Board list</h1>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Created_date</th>
-        <th><a class="btn btn-default" href="{% url 'board_new' %}"><span class="fa fa-plus"></span></a></th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for board in boards %}
-        <tr>
-          <th scope="row">{{ board.id }}</th>
-          <td><a href="{% url 'board_detail' pk=board.pk %}">{{ board.title }}</a></td>
-          <td>{{ board.created_date }}</td>
-          <td>
-            <a class="btn btn-primary btn-sm" href="{% url 'board_edit' pk=board.pk %}"><span class="fa fa-pencil"></span></a>
-            <a class="btn btn-danger btn-sm" href="{% url 'board_destroy' pk=board.pk %}"><span class="fa fa-trash"></span></a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="container">
+    <div class="title">
+      <h1>Board List <a class="btn btn-outline-default btn-just-icon btn-sm" href="{% url 'board_new' %}"><i class="fa fa-plus"></i></a></h1>
+    </div>
+
+    <div id="board_list" class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Created_date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for board in boards %}
+            <tr>
+              <th scope="row">{{ board.id }}</th>
+              <td><a class="" href="{% url 'board_detail' pk=board.pk %}">{{ board.title }}</a></td>
+              <td>{{ board.created_date }}</td>
+              <td>
+                <a class="btn btn-link btn-info btn-just-icon btn-sm" href="{% url 'board_edit' pk=board.pk %}"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-link btn-danger btn-just-icon btn-sm" href="{% url 'board_destroy' pk=board.pk %}"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock %}
