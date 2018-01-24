@@ -61,6 +61,6 @@ def list_new(request):
         new_list = List(title = title, board = board, created_date =  created_date)
         new_list.save()
 
-    html = render_to_string('list/_list_new.html', {'list' : new_list})
+    html = render_to_string('list/_list.html', {'list' : new_list})
 
     return HttpResponse(json.dumps(html), content_type='application/json')
