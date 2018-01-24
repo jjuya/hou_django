@@ -25,6 +25,9 @@ def board_new(request):
         if form.is_valid():
             board = form.save()
 
+            new_list = List(title="No title", board = board, created_date = timezone.now())
+            new_list.save()
+
             return redirect('board_detail', pk=board.pk)
     else:
         form = BoardForm()
@@ -84,6 +87,9 @@ def list_destroy(request, pk):
     del_list = get_object_or_404(List, pk = pk)
     board_id = del_list.board.pk
 
-    del_list.delete()
+    if del_list.title != "No title":
+        del_list.delete()
+    else:
+        message = "You don't destroy this list"
 
     return redirect('board_detail', pk=board_id)
