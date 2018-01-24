@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+import json
 
 from .models import *
 from .forms import *
@@ -48,3 +49,18 @@ def board_destroy(request, pk):
     board.delete()
 
     return redirect('board_list')
+
+def list_new(request):
+    if request.method == "POST":
+        title  = request.POST.get('title')
+        board = Board.objects.get(pk=request.POST.get('board_id'))
+        created_date = timezone.now()
+
+        new_list = List(title = title, board = board, created_date =  created_date)
+        new_list.save()
+
+        message = "sucess"
+    else:
+        message = "faile"
+
+    return redirect('board_detail', pk=new_list.board.pk)
