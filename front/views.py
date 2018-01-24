@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
+from django.http import HttpResponse
 import json
 
 from .models import *
@@ -59,8 +61,6 @@ def list_new(request):
         new_list = List(title = title, board = board, created_date =  created_date)
         new_list.save()
 
-        message = "sucess"
-    else:
-        message = "faile"
+    html = render_to_string('list/_list_new.html', {'list' : new_list})
 
-    return redirect('board_detail', pk=new_list.board.pk)
+    return HttpResponse(json.dumps(html), content_type='application/json')
