@@ -79,3 +79,11 @@ def list_edit(request, pk):
         form = ListForm(instance=edit_list)
 
     return render(request, 'list/list_form.html', {'form' : form})
+
+def list_destroy(request, pk):
+    del_list = get_object_or_404(List, pk = pk)
+    board_id = del_list.board.pk
+
+    del_list.delete()
+
+    return redirect('board_detail', pk=board_id)
