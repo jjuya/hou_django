@@ -23,6 +23,8 @@
       </form>
     </div>
 
+    {% include 'bookmark/_bookmark_new.html' with lists=lists %}
+
     <div class="container" id="lists">
       {% for list in lists %}
         {% include 'list/_list.html' with list=list %}
@@ -44,7 +46,7 @@
 					  "board_id": "{{ board.id }}",
             "csrfmiddlewaretoken": "{{ csrf_token }}"
           },
-          success: function(data){ // 성공했을 때 호출할 콜백을 지정한다.
+          success: function(data){
             $('#lists').append(data);
             $("#new_list_title").val('');
             alert("Success : List create");
@@ -52,6 +54,14 @@
           error:function(){
             alert("Error : List create");
           }
+        });
+      });
+
+      $(document).ready(function () {
+        $(".active_new_bookmark_form").on("click", function () {
+          var listId = $(this).data('id');
+          console.log(listId);
+          $("#new_bookmark_modal #id_list").val(listId);
         });
       });
     </script>

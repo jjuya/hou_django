@@ -19,3 +19,8 @@ class BookmarkForm(forms.ModelForm):
     class Meta:
         model = Bookmark
         fields = ('title', 'url', 'list')
+        widgets = {
+            'title' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'url' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'list' : forms.Select(attrs={'class' : 'form-control'})
+        }

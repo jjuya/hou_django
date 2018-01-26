@@ -1,0 +1,45 @@
+<div class="modal fade" id="new_bookmark_modal" tabindex="-1" role="dialog" aria-labelledby="new_bookmark_modal_label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="new_bookmark_modal_label"> New Bookmark </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form class="" action="{% url 'bookmark_new'%}" method="post">
+              <div class="modal-body">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                  <label for="id_title">Title</label>
+                  <input type="text" name="title" class="form-control" maxlength="200" required="" id="id_title">
+                </div>
+
+                <div class="form-group">
+                  <label for="id_url">Url</label>
+                  <input type="text" name="url" class="form-control" maxlength="200" required="" id="id_url">
+                </div>
+
+                <div class="form-group">
+                  <select name="list" class="form-control" required="" id="id_list">
+                    {% for list in lists %}
+                      <option value="{{ list.id }}">{{ list.title }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <div class="left-side">
+                      <button type="button" class="btn btn-default btn-link" data-dismiss="modal">Close</button>
+                  </div>
+                  <div class="divider"></div>
+                  <div class="right-side">
+                      <button type="submit" class="btn btn-danger btn-link">Submit</button>
+                  </div>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
