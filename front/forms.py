@@ -13,3 +13,9 @@ class ListForm(forms.ModelForm):
     class Meta:
         model = List
         fields = ('title', )
+
+class BookmarkForm(forms.ModelForm):
+
+    class Meta:
+        model = Bookmark
+        fields = ('title', 'url', 'list')

@@ -6,7 +6,7 @@ import json
 from .models import *
 from .forms import *
 
-# Create your views here.
+# views : board
 def board_list(request):
     boards = Board.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
     return render(request, 'board/board_list.html', {'boards' : boards})
@@ -14,7 +14,8 @@ def board_list(request):
 def board_detail(request, pk):
     board = get_object_or_404(Board, pk = pk)
 
-    lists = List.objects.filter(board = board, created_date__lte=timezone.now()).order_by('created_date')
+    # lists = List.objects.filter(board = board, created_date__lte=timezone.now()).order_by('created_date')
+    lists = board.list_set.all()
 
     return render(request, 'board/board_detail.html', {'board' : board, 'lists' : lists})
 
@@ -55,6 +56,8 @@ def board_destroy(request, pk):
 
     return redirect('board_list')
 
+
+# views : list
 def list_new(request):
     if request.method == "POST":
         title  = request.POST.get('title')
@@ -91,5 +94,44 @@ def list_destroy(request, pk):
         del_list.delete()
     else:
         message = "You don't destroy this list"
+
+    return redirect('board_detail', pk=board_id)
+
+# views : bookmark
+def bookmark_new(request):
+
+    if request.method == "POST":
+        form = BookmarkForm(request.POST)
+
+        if form.is_valid():
+            bookmark = form.save()
+
+            return redirect('board_detail', pk=bookmark.list.board.pk)
+    else:
+        form = BookmarkForm()
+
+    return render(request, 'bookmark/bookmark_form.html', {'form' : form})
+
+def bookmark_edit(request, pk):
+    edit_bookmark = get_object_or_404(Bookmark, pk = pk)
+
+    if request.method == "POST":
+        form = BookmarkForm(request.POST, instance=edit_bookmark)
+
+        if form.is_valid():
+            edit_bookmark = form.save()
+
+            return redirect('board_detail', pk=edit_bookmark.list.board.pk)
+    else:
+        form = BookmarkForm(instance=edit_bookmark)
+
+    return render(request, 'bookmark/bookmark_form.html', {'form' : form})
+
+def bookmark_destroy(request, pk):
+    del_bookmark = get_object_or_404(Bookmark, pk = pk)
+    board_id = del_bookmark.list.board.pk
+
+    del_bookmark.delete()
+
 
     return redirect('board_detail', pk=board_id)

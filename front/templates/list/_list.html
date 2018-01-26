@@ -1,7 +1,33 @@
-<th scope="row">{{ list.id }}</th>
-<td><a href="">{{ list.title }}</a></td>
-<td>{{ list.created_date }}</td>
-<td>
-  <a class="btn btn-link btn-info btn-just-icon btn-sm" href="{% url 'list_edit' pk=list.pk %}"><span class="fa fa-pencil"></span></a>
-  <a class="btn btn-link btn-danger btn-just-icon btn-sm" href="{% url 'list_destroy' pk=list.pk %}"><span class="fa fa-trash"></span></a>
-</td>
+<div class="row">
+    <h3>
+      {{ list.title }}
+    </h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">URL</th>
+          <th scope="col"><a class="text-info" href="{% url 'bookmark_new'%}"><i class="fa fa-plus"></i> add bookmark</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bookmark in list.bookmark_set.all %}
+          <tr>
+            {% include 'bookmark/_bookmark.html' with bookmark=bookmark %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+
+<!-- <script type="text/javascript">
+  $(document).ready(function () {
+    $(".active_new_bookmark_form").on("click", function () {
+      var listId = $(this).data('id');
+      $("#new_bookmark_modal new_bookmark_list").val(listId);
+    });
+  });
+</script> -->

@@ -1,0 +1,7 @@
+<th scope="row">{{ bookmark.id }}</th>
+<td><a href="">{{ bookmark.title }}</a></td>
+<td>{{ bookmark.url }}</td>
+<td>
+  <a class="btn btn-link btn-info btn-just-icon btn-sm" href="{% url 'bookmark_edit' pk=bookmark.id %}"><span class="fa fa-pencil"></span></a>
+  <a class="btn btn-link btn-danger btn-just-icon btn-sm" href="{% url 'bookmark_destroy' pk=bookmark.id %}"><span class="fa fa-trash"></span></a>
+</td>

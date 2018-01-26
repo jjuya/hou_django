@@ -8,6 +8,7 @@
       </div>
     </div>
 
+    <!-- list create form -->
     <div class="container">
       <form id="new_list" class="">
         <div class="row form-group">
@@ -22,27 +23,10 @@
       </form>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Created_date</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody id="lists">
-            {% for list in lists %}
-              <tr>
-                {% include 'list/_list.html' with list=list %}
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-
-      </div>
+    <div class="container" id="lists">
+      {% for list in lists %}
+        {% include 'list/_list.html' with list=list %}
+      {% endfor %}
     </div>
 
     <script type="text/javascript">

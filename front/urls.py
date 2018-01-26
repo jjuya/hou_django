@@ -10,4 +10,7 @@ urlpatterns = [
     url(r'^list/new/$', views.list_new, name='list_new'),
     url(r'^list/(?P<pk>\d+)/edit$', views.list_edit, name='list_edit'),
     url(r'^list/(?P<pk>\d+)/destroy$', views.list_destroy, name='list_destroy'),
+    url(r'^bookmark/new/$', views.bookmark_new, name='bookmark_new'),
+    url(r'^bookmark/(?P<pk>\d+)/edit$', views.bookmark_edit, name='bookmark_edit'),
+    url(r'^bookmark/(?P<pk>\d+)/destroy$', views.bookmark_destroy, name='bookmark_destroy'),
 ]
